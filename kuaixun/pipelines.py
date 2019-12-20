@@ -91,6 +91,7 @@ class MysqlPipeline(object):
         content = item['content']
         for condition in Condition_list:
             if condition in content and 'e公司讯' in content and '申购代码' not in content:
+                print(condition)
                 result = {
                     'art_source': '证券时报',
                     'article_id': item['article_id'],
@@ -102,4 +103,10 @@ class MysqlPipeline(object):
                 result = json.dumps(result, ensure_ascii=False)
 
                 back_info = self.redis_conn.publish('bot_news', result)
+
                 logging.info('redis publish info successful,redis返回信息为：{0},发布数据id为：{1}'.format(back_info, item['article_id']))
+
+                # 如果新闻符合多个条件，只发布一次
+                Tag = True
+                if Tag:
+                    return
