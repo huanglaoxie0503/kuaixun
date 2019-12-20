@@ -22,8 +22,6 @@ class StcnSpider(scrapy.Spider):
     start_urls = ['http://kuaixun.stcn.com/index.shtml']
 
     def parse(self, response):
-        proxy = response.meta['proxy']
-        logging.info('代理IP为：{0}'.format(proxy))
         infos = response.xpath('//*[@id="news_list2"]/li')
         for info in infos:
             title = info.xpath('a/text()').extract_first()
