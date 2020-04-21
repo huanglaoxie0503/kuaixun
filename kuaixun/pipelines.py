@@ -90,7 +90,7 @@ class MysqlPipeline(object):
         title = item['title']
         content = item['content']
         for condition in Condition_list:
-            if condition in content and 'e公司讯' in content and '申购代码' not in content:
+            if condition in content and 'e公司讯' in content and '申购代码' not in content and "捐赠" not in content:
                 print(condition)
                 result = {
                     'art_source': '证券时报',
