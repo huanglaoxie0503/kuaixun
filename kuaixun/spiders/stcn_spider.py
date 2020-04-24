@@ -19,7 +19,7 @@ logging.basicConfig(
 class StcnSpider(scrapy.Spider):
     name = 'stcn_spider'
     allowed_domains = ['kuaixun.stcn.com']
-    start_urls = ['http://kuaixun.stcn.com/index.shtml']
+    start_urls = ['https://kuaixun.stcn.com/index.html']
 
     def parse(self, response):
         infos = response.xpath('//*[@id="news_list2"]/li')
@@ -31,6 +31,8 @@ class StcnSpider(scrapy.Spider):
             publish_time = timep + ' ' + minute
 
             temp = link.split("/")
+            detail_url = "/".join(temp[1:])
+            detail_url = "https://kuaixun.stcn.com/{0}".format(detail_url)
             article_id = temp[-1:]
             article_id = "".join(article_id).split(".")[0].replace('_', '')
 
@@ -47,7 +49,7 @@ class StcnSpider(scrapy.Spider):
             # 新闻发布时间
             item['publish_time'] = publish_time
 
-            yield scrapy.Request(link, headers=headers, meta={"item": item}, callback=self.get_content)
+            yield scrapy.Request(detail_url, headers=headers, meta={"item": item}, callback=self.get_content)
 
     def get_content(self, response):
         item = response.meta['item']
