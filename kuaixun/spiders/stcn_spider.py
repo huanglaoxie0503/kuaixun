@@ -3,7 +3,6 @@ import scrapy
 import re
 import logging
 
-
 from kuaixun.common import get_html_tag, operation
 from kuaixun.items import KuaixunItem
 from kuaixun.settings import headers
@@ -26,9 +25,9 @@ class StcnSpider(scrapy.Spider):
         for info in infos:
             title = info.xpath('a/text()').extract_first()
             link = info.xpath('a/@href').extract_first()
-            timep = info.xpath('span/text()').extract_first()
+            time_p = info.xpath('span/text()').extract_first()
             minute = info.xpath('i/text()').extract_first()
-            publish_time = timep + ' ' + minute
+            publish_time = time_p + ' ' + minute
 
             temp = link.split("/")
             detail_url = "/".join(temp[1:])
