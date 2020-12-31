@@ -32,16 +32,17 @@ class KuaixunItem(scrapy.Item):
 
     def get_insert_sql(self):
         # 插入：sql语句
-        insert_sql = """insert into {0} (article_id, publish_time, title, art_source, content,url,content_p) 
-                        VALUES (%s, %s, %s, %s, %s, %s, %s)""".format(MYSQL_TABLE)
+        insert_sql = """insert into {0} (article_id, title, url, source, key_word,publish_time,content,content_p) 
+                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)""".format(MYSQL_TABLE)
 
         param = (
             self["article_id"],
-            self["publish_time"],
             self["title"],
-            self["art_source"],
-            self["content"],
             self['url'],
+            self["art_source"],
+            None,
+            self["publish_time"],
+            self["content"],
             self['content_p'],
         )
         return insert_sql, param

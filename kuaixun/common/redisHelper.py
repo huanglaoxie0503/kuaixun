@@ -23,7 +23,7 @@ class RedisClient(object):
         :param score: 分数
         :return: 添加结果
         """
-        if not re.match('\d+\.\d+\.\d+\.\d+\:\d+', proxy):
+        if not re.match(r'\d+\.\d+\.\d+\.\d+\:\d+', proxy):
             print('代理不符合规范', proxy, '丢弃')
             return
         if not self.db.zscore(REDIS_KEY, proxy):
@@ -62,7 +62,7 @@ class RedisClient(object):
         :param proxy: 代理
         :return: 是否存在
         """
-        return not self.db.zscore(REDIS_KEY, proxy) == None
+        return not self.db.zscore(REDIS_KEY, proxy) is None
 
     def max(self, proxy):
         """
@@ -99,5 +99,5 @@ class RedisClient(object):
 
 if __name__ == '__main__':
     conn = RedisClient()
-    result = conn.all()
-    print(len(result))
+    info = conn.all()
+    print(len(info))

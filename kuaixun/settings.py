@@ -27,7 +27,7 @@ ROBOTSTXT_OBEY = False
 # Configure a delay for requests for the same website (default: 0)
 # See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = random.randint(0, 3)
+DOWNLOAD_DELAY = random.randint(0, 1)
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -89,18 +89,18 @@ ITEM_PIPELINES = {
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-MYSQL_HOST = '10.10.15.105'
-MYSQL_USER = 'hezudao'
-MYSQL_PASSWORD = 'hezudaowud'
+MYSQL_HOST = '127.0.0.1'
+MYSQL_USER = 'username'
+MYSQL_PASSWORD = 'password'
 MYSQL_DBNAME = 'crawl'
-MYSQL_TABLE = 'kuaixun'
+MYSQL_TABLE = 'news'
 
 # 指定数据库的主机IP
-REDIS_HOST = "10.10.13.20"
+REDIS_HOST = "127.0.0.1"
 # 指定数据库的端口号
 REDIS_PORT = 6379
-REDIS_DB = 11
-REDIS_PASSWORD = "wudang"
+REDIS_DB = 1
+REDIS_PASSWORD = "password"
 
 REDIS_KEY = 'proxies'
 

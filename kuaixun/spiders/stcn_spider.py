@@ -15,8 +15,8 @@ logging.basicConfig(
 )
 
 
-class StcnSpider(scrapy.Spider):
-    name = 'stcn_spider'
+class NoticeSpider(scrapy.Spider):
+    name = 'notice_spider'
     allowed_domains = ['kuaixun.stcn.com']
     start_urls = ['https://kuaixun.stcn.com/index.html']
 
@@ -32,8 +32,10 @@ class StcnSpider(scrapy.Spider):
             temp = link.split("/")
             detail_url = "/".join(temp[1:])
             detail_url = "https://kuaixun.stcn.com/{0}".format(detail_url)
-            article_id = temp[-1:]
-            article_id = "".join(article_id).split(".")[0].replace('_', '')
+            articles = temp[-1:]
+            articles = "".join(articles)
+            articles = articles.split('_')[1]
+            article_id = articles.split('.')[0]
 
             judge_id = operation.judge_article_id(article_id=article_id)
             if judge_id:
